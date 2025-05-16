@@ -7,6 +7,7 @@ use App\Controllers\SystemBaseController;
 use App\Controllers\SystemMessageController;
 use App\Models\UnidadesModels;
 use App\Models\VUnidadesMunicipiosModels;
+use App\Models\VSelectUnidadePeriodoModels;
 use Exception;
 
 class UnidadeDbController extends BaseController
@@ -14,6 +15,7 @@ class UnidadeDbController extends BaseController
     // private $ModelUpload;
     private $ModelUnidades;
     private $ModelUnidadesMunicipios;
+    private $ModelVSelectUnidadePeriodo;
     private $pagination;
     private $message;
     private $uri;
@@ -23,6 +25,7 @@ class UnidadeDbController extends BaseController
         // $this->ModelUpload = new UploadModel();
         $this->ModelUnidades = new UnidadesModels();
         $this->ModelUnidadesMunicipios = new VUnidadesMunicipiosModels();
+        $this->ModelVSelectUnidadePeriodo = new VSelectUnidadePeriodoModels();
         $this->uri = new \CodeIgniter\HTTP\URI(current_url());
         $this->message = new SystemMessageController();
         $this->pagination = new SystemBaseController();
@@ -122,6 +125,52 @@ class UnidadeDbController extends BaseController
         return $response;
     }
 
+    # route POST /www/sigla/rota
+    # route GET /www/sigla/rota
+    # Informação sobre o controller
+    # retorno do controller [JSON]
+    public function dbReadUnidadePeriodo($parameter = NULL, $page = 1, $limit = 10)
+    {
+        try {
+            if ($parameter !== NULL) {
+                $dbResponse = $this
+                    ->ModelUnidadesMunicipios
+                    ->where('id', $parameter)
+                    ->where('deleted_at', NULL)
+                    ->orderBy('updated_at', 'DESC')
+                    ->dBread()
+                    ->paginate(1, 'paginator', $page);
+                //
+            } else {
+                $dbResponse = $this
+                    ->ModelUnidadesMunicipios
+                    ->where('deleted_at', NULL)
+                    ->orderBy('updated_at', 'DESC')
+                    ->dBread()
+                    ->paginate($limit, 'paginator', $page);
+                //
+            }
+            // myPrint($dbResponse, 'src\app\Controllers\UnidadeDbController.php');
+            // Paginação
+            $pager = \Config\Services::pager();
+            $paginationLinks = $pager->makeLinks($page, $limit, $pager->getTotal('paginator'), 'default_full');
+            $linksArray = $this->pagination->extractPaginationLinks($paginationLinks);
+            //
+            $response = array(
+                'dbResponse' => $dbResponse,
+                'linksArray' => $linksArray
+            );
+            //
+        } catch (\Exception $e) {
+            if (DEBUG_MY_PRINT) {
+                myPrint($e->getMessage(), 'src\app\Controllers\UnidadeDbController.php');
+            }
+            $message = $e->getMessage();
+            $this->message->message([$message], 'danger', $parameter, 5);
+            $response = array();
+        }
+        return $response;
+    }
     # route POST /www/sigla/rota
     # route GET /www/sigla/rota
     # Informação sobre o controller

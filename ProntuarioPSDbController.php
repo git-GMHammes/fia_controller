@@ -43,7 +43,7 @@ class ProntuarioPSDbController extends BaseController
     # $this->DbController->dbFields($fileds = array();
     public function dbFields($processRequestFields = array())
     {
-        // myPrint($processRequestFields, 'src\app\Controllers\SystemUploadDbController.php', true);
+        // myPrint(s$processRequestFields, 'src\app\Controllers\SystemUploadDbController.php', true);
         $dbCreate = array();
         $autoColumn = $this->ModelsProntuarioPsicoSocial->getColumnsFromTable();
         // myPrint($autoColumn, '');
@@ -59,10 +59,19 @@ class ProntuarioPSDbController extends BaseController
         (isset($processRequestFields['prontuario_MedidasSocioEducativas'])) ? ($dbCreate['MedidasSocioEducativas'] = $processRequestFields['prontuario_MedidasSocioEducativas']) : NULL;
         (isset($processRequestFields['prontuario_UsodeDrogas'])) ? ($dbCreate['UsodeDrogas'] = $processRequestFields['prontuario_UsodeDrogas']) : NULL;
         (isset($processRequestFields['prontuario_Deficiencia'])) ? ($dbCreate['Deficiencia'] = $processRequestFields['prontuario_Deficiencia']) : NULL;
-        (isset($processRequestFields['prontuario_necessita_mediador'])) ? ($dbCreate['NecesMediador'] = $processRequestFields['prontuario_necessita_mediador']) : NULL;
-        (isset($processRequestFields['prontuario_cad_unico'])) ? ($dbCreate['CadUnico'] = $processRequestFields['prontuario_cad_unico']) : NULL;
-        // (isset($processRequestFields['prontuario_referenciado_na_rede'])) ? ($dbCreate['ReferenciadoNaRede'] = $processRequestFields['prontuario_referenciado_na_rede']) : NULL;
+        (isset($processRequestFields['prontuario_NecesMediador'])) ? ($dbCreate['NecesMediador'] = $processRequestFields['prontuario_NecesMediador']) : NULL;
+        (isset($processRequestFields['prontuario_CadUnico'])) ? ($dbCreate['CadUnico'] = $processRequestFields['prontuario_CadUnico']) : NULL;
+        (isset($processRequestFields['prontuario_EncaminhamentoOrgao'])) ? ($dbCreate['EncaminhamentoOrgao'] = $processRequestFields['prontuario_EncaminhamentoOrgao']) : NULL;
+        (isset($processRequestFields['prontuario_Vulnerabilidade'])) ? ($dbCreate['Vulnerabilidade'] = $processRequestFields['prontuario_Vulnerabilidade']) : NULL;
+        (isset($processRequestFields['prontuario_PontuacaoVulnerabilidade'])) ? ($dbCreate['PontuacaoVulnerabilidade'] = $processRequestFields['prontuario_PontuacaoVulnerabilidade']) : NULL;
         (isset($processRequestFields['prontuario_PontuacaoTotal'])) ? ($dbCreate['PontuacaoTotal'] = $processRequestFields['prontuario_PontuacaoTotal']) : NULL;
+        (isset($processRequestFields['prontuario_MedidasSocioEducativasDesc'])) ? ($dbCreate['MedidasSocioEducativasDesc'] = $processRequestFields['prontuario_MedidasSocioEducativasDesc']) : NULL;
+        (isset($processRequestFields['prontuario_UsoDrogasDesc'])) ? ($dbCreate['UsoDrogasDesc'] = $processRequestFields['prontuario_UsoDrogasDesc']) : NULL;
+        (isset($processRequestFields['prontuario_CadUnicoProgramaSocial'])) ? ($dbCreate['CadUnicoProgramaSocial'] = $processRequestFields['prontuario_CadUnicoProgramaSocial']) : NULL;
+        (isset($processRequestFields['prontuario_EncaminhamentoOrgaoDesc'])) ? ($dbCreate['EncaminhamentoOrgaoDesc'] = $processRequestFields['prontuario_EncaminhamentoOrgaoDesc']) : NULL;
+        (isset($processRequestFields['prontuario_DeficienciaDesc'])) ? ($dbCreate['DeficienciaDesc'] = $processRequestFields['prontuario_DeficienciaDesc']) : NULL;
+        (isset($processRequestFields['prontuario_NecesMediadorTipoFamiliar'])) ? ($dbCreate['NecesMediadorTipoFamiliar'] = $processRequestFields['prontuario_NecesMediadorTipoFamiliar']) : NULL;
+        // (isset($processRequestFields['prontuario_referenciado_na_rede'])) ? ($dbCreate['ReferenciadoNaRede'] = $processRequestFields['prontuario_referenciado_na_rede']) : NULL;
         // myPrint($dbCreate, 'src\app\Controllers\ExempleDbController.php');
         return ($dbCreate);
     }

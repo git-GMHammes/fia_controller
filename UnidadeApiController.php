@@ -151,6 +151,67 @@ class UnidadeApiController extends ResourceController
     # route GET /www/exemple/group/api/teste/(:any)
     # Informação sobre o controller
     # retorno do controller [JSON]
+    public function dbReadUnidadePeriodo($parameter = NULL)
+    {
+        # Parâmentros para receber um POST
+        $request = service('request');
+        $getMethod = $request->getMethod();
+        $pageGet = $this->request->getGet('page');
+        $page = (isset($pageGet) && !empty($pageGet)) ? ($pageGet) : (1);
+        $processRequest = (array) $request->getVar();
+        $json = isset($processRequest['json']) && $processRequest['json'] == 1 ? 1 : 0;
+        #
+        try {
+            #
+            $id = isset($processRequest['id']) ? ($processRequest['id']) : ($parameter);
+            $requestDb = $this->DbController->dbRead($id, $page);
+            #
+            $apiRespond = [
+                'status' => 'success',
+                'message' => 'API loading data (dados para carregamento da API)',
+                'date' => date('Y-m-d'),
+                'api' => [
+                    'version' => '1.0',
+                    'method' => $getMethod,
+                    'description' => 'API Description',
+                    'content_type' => 'application/x-www-form-urlencoded'
+                ],
+                // 'method' => '__METHOD__',
+                // 'function' => '__FUNCTION__',
+                'result' => $requestDb,
+                'metadata' => [
+                    'page_title' => 'Application title',
+                    'getURI' => $this->uri->getSegments(),
+                    'environment' => ENVIRONMENT_CHOICE,
+                    // Você pode adicionar campos comentados anteriormente se forem relevantes
+                    // 'method' => '__METHOD__',
+                    // 'function' => '__FUNCTION__',
+                ]
+            ];
+            $response = $this->response->setJSON($apiRespond, 201);
+        } catch (\Exception $e) {
+            $apiRespond = array(
+                'message' => array('danger' => $e->getMessage()),
+                'page_title' => 'Application title',
+                'getURI' => $this->uri->getSegments(),
+                    'environment' => ENVIRONMENT_CHOICE,
+            );
+            $this->message->message($message = array(), 'danger', $parameter, 5);
+            $response = $this->response->setJSON($apiRespond, 500);
+        }
+        if ($json == 1) {
+            return $response;
+            // return redirect()->back();
+            // return redirect()->to('project/endpoint/parameter/parameter/' . $parameter);
+        } else {
+            return $response;
+        }
+    }
+
+    # route POST /www/exemple/group/api/teste/(:any)
+    # route GET /www/exemple/group/api/teste/(:any)
+    # Informação sobre o controller
+    # retorno do controller [JSON]
     public function dbRead($parameter = NULL)
     {
         # Parâmentros para receber um POST

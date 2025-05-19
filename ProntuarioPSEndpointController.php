@@ -175,7 +175,7 @@ class ProntuarioPSEndpointController extends ResourceController
         $loadView4 = $this->viewFormatacao->camposFormatacao();
         #
         $loadView5 = array(
-            'fia/ptpa/prontuario/AppForm',
+            'fia/ptpa/prontuario/AppForm2',
             'fia/ptpa/prontuario/AppListar_conteudo',
             'fia/ptpa/prontuario/AppListar',
             $this->app_footer,

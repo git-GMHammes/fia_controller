@@ -239,6 +239,7 @@ class AdolescenteApiController extends ResourceController
         try {
             #
             $id = isset($processRequest['id']) ? ($processRequest['id']) : ($parameter);
+            
             $requestDb = $this->DbController->dbRead($id, $page);
             #
             $apiRespond = [

@@ -43,7 +43,7 @@ class ProntuarioPSDbController extends BaseController
     # $this->DbController->dbFields($fileds = array();
     public function dbFields($processRequestFields = array())
     {
-        // myPrint(s$processRequestFields, 'src\app\Controllers\SystemUploadDbController.php', true);
+        // myPrint($processRequestFields, 'src\app\Controllers\SystemUploadDbController.php', true);
         $dbCreate = array();
         $autoColumn = $this->ModelsProntuarioPsicoSocial->getColumnsFromTable();
         // myPrint($autoColumn, '');

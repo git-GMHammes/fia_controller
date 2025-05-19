@@ -21,7 +21,6 @@ use Exception;
 class UsuarioApiController extends ResourceController
 {
     use ResponseTrait;
-
     private $dbFields;
     private $uri;
     private $tokenCsrf;
@@ -735,11 +734,12 @@ class UsuarioApiController extends ResourceController
 
         #
         $menu = array(
-            "Adolescente",
-            "Períodos",
-            "Unidades",
+            "Funcionários",
             "Alocar Funcionário",
-            "Funcionários"
+            "Unidades",
+            "Períodos",
+            "Adolescente",
+            "Prontuário",
         );
         #
         $modulo2 = array(

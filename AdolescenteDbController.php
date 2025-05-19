@@ -144,7 +144,6 @@ class AdolescenteDbController extends BaseController
                     ->paginate($limit, 'paginator', $page);
                 //
             }
-            ;
             // Paginação
             $pager = \Config\Services::pager();
             $paginationLinks = $pager->makeLinks($page, $limit, $pager->getTotal('paginator'), 'default_full');

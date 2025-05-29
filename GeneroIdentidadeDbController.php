@@ -187,7 +187,7 @@ class GeneroIdentidadeDbController extends BaseController
             }
 
             $dbResponse = $query
-                ->orderBy('id', 'DESC')
+                ->orderBy('order', 'ASC')
                 ->paginate($limit, 'paginator', $page);
 
             // Paginação

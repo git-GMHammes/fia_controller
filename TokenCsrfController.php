@@ -31,7 +31,7 @@ class TokenCsrfController extends BaseController
         try {
             $token_csrf = myUCI();
             session()->set('token_csrf',  $token_csrf);
-            session()->markAsTempdata('token_csrf', 1800);
+            session()->markAsTempdata('token_csrf', 7200);
             return $token_csrf;
         } catch (\Exception $e) {
             $this->message->message(['ERRO: ' . $e->getMessage()], 'danger');
